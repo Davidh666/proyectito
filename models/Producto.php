@@ -16,16 +16,20 @@ class Producto {
     // ==========================
     // INSERTAR
     // ==========================
-    public function insertar($nombre, $precio, $stock) {
+  // En models/Producto.php
 
-        $sql = "INSERT INTO productos(nombre, precio, stock)
-                VALUES(:nombre, :precio, :stock)";
+    public function insertar($nombre, $precio, $stock, $nombre_cliente, $correo, $venta) {
+        $sql = "INSERT INTO productos(nombre, precio, stock, nombre_cliente, correo, venta) 
+                VALUES(:nombre, :precio, :stock, :nombre_cliente, :correo, :venta)";
 
         $stmt = $this->conexion->prepare($sql);
 
         $stmt->bindParam(":nombre", $nombre);
         $stmt->bindParam(":precio", $precio);
         $stmt->bindParam(":stock", $stock);
+        $stmt->bindParam(":nombre_cliente", $nombre_cliente);
+        $stmt->bindParam(":correo", $correo);
+        $stmt->bindParam(":venta", $venta);
 
         return $stmt->execute();
     }
